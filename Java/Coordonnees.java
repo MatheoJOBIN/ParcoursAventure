@@ -8,7 +8,6 @@ public class Coordonnees {
      * Crée des coordonnées avec une position donnée
      * @param x La position en abscisse
      * @param y La position en ordonnée
-     * @param obstacleRencontre True si un obstacle a été rencontré, false sinon
      */
     public Coordonnees(int x, int y) {
         this.x = x;

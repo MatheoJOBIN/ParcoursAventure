@@ -43,11 +43,11 @@ public class Main {
                         aventurier.afficherParcours();
                         System.out.println("\n Position finale de l'aventurier " + aventurier.getNom() + " : ("
                                 + positionFinaleX + ", "
-                                + positionFinaleY + ")");
+                                + positionFinaleY + ")\n");
                     }
                 }
             } else {
-                System.out.println("Le dossier d'aventuriers est vide ou n'existe pas.");
+                System.out.println("Le dossier des aventuriers est vide ou n'existe pas.");
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -57,8 +57,7 @@ public class Main {
     /**
      * Crée un aventurier avec une position initiale donnée
      * 
-     * @param cheminFichier Le chemin vers le fichier contenant les coordonnées
-     *                      initiales
+     * @param cheminFichier Le chemin vers le fichier contenant les coordonnées initiales
      * @param labyrinthe    Le labyrinthe dans lequel l'aventurier se trouve
      * @return Aventurier : L'aventurier créé
      * @throws IOException Exception levée si le fichier n'existe pas

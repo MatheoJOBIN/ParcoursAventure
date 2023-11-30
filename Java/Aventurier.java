@@ -7,6 +7,7 @@ public class Aventurier {
     /**
      * Crée un aventurier avec une position initiale donnée
      * 
+     * @param nom        Le nom de l'aventurier
      * @param xPosition  La position initiale en abscisse
      * @param yPosition  La position initiale en ordonnée
      * @param labyrinthe Le labyrinthe dans lequel l'aventurier se trouve
@@ -24,8 +25,7 @@ public class Aventurier {
     /**
      * Déplace l'aventurier dans la direction donnée
      * 
-     * @param direction La direction dans laquelle l'aventurier doit se déplacer (N,
-     *                  S, E ou O)
+     * @param direction La direction dans laquelle l'aventurier doit se déplacer (N, S, E ou O)
      */
     public void deplacer(String direction) {
         switch (direction) {
@@ -67,7 +67,7 @@ public class Aventurier {
      * Affiche le parcours de l'aventurier
      */
     public void afficherParcours() {
-        System.out.println("\n\nParcours de " + this.nom + " :\n");
+        System.out.println("\nParcours de " + this.nom + " :\n");
         for (Coordonnees etape : parcours.getEtapes()) {
             System.out.println(etape.getX() + "," + etape.getY());
         }

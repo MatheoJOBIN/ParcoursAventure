@@ -7,7 +7,9 @@ public class Parcours {
     private List<Coordonnees> etapes;
 
     /**
-     * Instancie la liste des étapes
+     * Instancie un parcours avec une position initiale donnée
+     * @param xStart La position initiale en abscisse
+     * @param yStart La position initiale en ordonnée
      */
     public Parcours(int xStart, int yStart) {
         this.etapes = new ArrayList<>();
