@@ -4,11 +4,15 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.File;
 import java.io.IOException;
+import java.util.Map;
+import java.util.HashMap;
 
 public class Main {
     public static void main(String[] args) {
         String cheminLabyrinthe = "./Ressources/carte.txt";
         String cheminAventuriers = "./Ressources/Aventuriers";
+
+        Map<String, Aventurier> aventuriers = new HashMap<>();
 
         try {
             // Récupération du labyrinthe
@@ -24,17 +28,22 @@ public class Main {
             if (fichiersAventuriers != null) {
                 for (File fichierAventurier : fichiersAventuriers) {
                     if (fichierAventurier.isFile()) {
-                        // Création de l'aventurier
+                        // Création de l'aventurier, et ajout de celui-ci à la liste des aventuriers
                         Aventurier aventurier = nouvelAventurier(fichierAventurier.getAbsolutePath(), labyrinthe);
+                        aventuriers.put(aventurier.getNom(), aventurier);
 
                         // Résolution des déplacements
                         deplacerAventurier(labyrinthe, aventurier,
                                 lireDeplacements(fichierAventurier.getAbsolutePath()));
 
                         // Position finale de 'aventurier
+                        int positionFinaleX = aventurier.getActualPosition().getX();
+                        int positionFinaleY = aventurier.getActualPosition().getY();
+
                         System.out.println("Position finale de l'aventurier " + aventurier.getNom() + " : ("
-                                + aventurier.getXPosition() + ", "
-                                + aventurier.getYPosition() + ")");
+                                + positionFinaleX + ", "
+                                + positionFinaleY + ")");
+                        aventurier.afficherParcours();
                     }
                 }
             } else {
@@ -48,8 +57,9 @@ public class Main {
     /**
      * Crée un aventurier avec une position initiale donnée
      * 
-     * @param cheminFichier Le chemin vers le fichier contenant les coordonnées initiales
-     * @param labyrinthe Le labyrinthe dans lequel l'aventurier se trouve
+     * @param cheminFichier Le chemin vers le fichier contenant les coordonnées
+     *                      initiales
+     * @param labyrinthe    Le labyrinthe dans lequel l'aventurier se trouve
      * @return Aventurier : L'aventurier créé
      * @throws IOException Exception levée si le fichier n'existe pas
      */
@@ -95,8 +105,8 @@ public class Main {
     private static void deplacerAventurier(Labyrinthe labyrinthe, Aventurier aventurier, String deplacements) {
         for (char deplacement : deplacements.toCharArray()) {
 
-            int x = aventurier.getXPosition();
-            int y = aventurier.getYPosition();
+            int x = aventurier.getActualPosition().getX();
+            int y = aventurier.getActualPosition().getY();
 
             switch (deplacement) {
                 case 'N':

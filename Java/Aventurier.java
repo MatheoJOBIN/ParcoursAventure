@@ -1,43 +1,45 @@
 package Java;
 
 public class Aventurier {
-    private String nom = "John Doe"; 
-    private int xPosition = 0;
-    private int yPosition = 0;
+    private String nom = "John Doe";
+    private Parcours parcours;
 
     /**
      * Crée un aventurier avec une position initiale donnée
-     * @param xPosition La position initiale en abscisse
-     * @param yPosition La position initiale en ordonnée
+     * 
+     * @param xPosition  La position initiale en abscisse
+     * @param yPosition  La position initiale en ordonnée
      * @param labyrinthe Le labyrinthe dans lequel l'aventurier se trouve
      */
     public Aventurier(String nom, int xPosition, int yPosition, Labyrinthe labyrinthe) {
-        if(xPosition < 0 || yPosition < 0 || !labyrinthe.checkInbound(xPosition, yPosition) || !labyrinthe.checkFree(xPosition, yPosition)) {
+        if (xPosition < 0 || yPosition < 0 || !labyrinthe.checkInbound(xPosition, yPosition)
+                || !labyrinthe.checkFree(xPosition, yPosition)) {
             throw new IllegalArgumentException("La position initiale de l'aventurier est invalide.");
-        }else{
+        } else {
             this.nom = nom;
-            this.xPosition = xPosition;
-            this.yPosition = yPosition;
+            this.parcours = new Parcours(xPosition, yPosition);
         }
     }
 
     /**
      * Déplace l'aventurier dans la direction donnée
-     * @param direction La direction dans laquelle l'aventurier doit se déplacer (N, S, E ou O)
+     * 
+     * @param direction La direction dans laquelle l'aventurier doit se déplacer (N,
+     *                  S, E ou O)
      */
     public void deplacer(String direction) {
         switch (direction) {
             case "N":
-                this.yPosition--;
+                this.parcours.ajouterEtape("N");
                 break;
             case "S":
-                this.yPosition++;
+                this.parcours.ajouterEtape("S");
                 break;
             case "E":
-                this.xPosition++;
+                this.parcours.ajouterEtape("E");
                 break;
             case "O":
-                this.xPosition--;
+                this.parcours.ajouterEtape("O");
                 break;
             default:
                 break;
@@ -45,26 +47,29 @@ public class Aventurier {
     }
 
     /**
-     * Retourne la position en abscisse de l'aventurier
-     * @return int : La position en abscisse de l'aventurier
+     * Retourne l'étape actuelle de l'aventurier
+     * @return Coordonnees : L'étape actuelle de l'aventurier
      */
-    public int getXPosition() {
-        return this.xPosition;
-    }
-
-    /**
-     * Retourne la position en ordonnée de l'aventurier
-     * @return int : La position en ordonnée de l'aventurier
-     */
-    public int getYPosition() {
-        return this.yPosition;
+    public Coordonnees getActualPosition() {
+        return parcours.getEtapeActuelle();
     }
 
     /**
      * Retourne le nom de l'aventurier
+     * 
      * @return String : Le nom de l'aventurier
      */
     public String getNom() {
         return this.nom;
+    }
+
+    /**
+     * Affiche le parcours de l'aventurier
+     */
+    public void afficherParcours() {
+        System.out.println("Parcours de " + this.nom + " :\n");
+        for (Coordonnees etape : parcours.getEtapes()) {
+            System.out.println(etape.getX() + "," + etape.getY());
+        }
     }
 }

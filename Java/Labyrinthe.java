@@ -79,7 +79,8 @@ public class Labyrinthe {
      * 
      * @param x Coordonnées en abscisse
      * @param y Coordonnées en ordonnée
-     * @return boolean : True si les coordonnées sont dans le labyrinthe, false sinon
+     * @return boolean : True si les coordonnées sont dans le labyrinthe, false
+     *         sinon
      */
     public boolean checkInbound(int x, int y) {
         if (x < 0 || y < 0 || x >= nbLignes || y >= nbColonnes) {
