@@ -46,7 +46,7 @@ public class Aventurier {
 
     /**
      * Retourne la position en abscisse de l'aventurier
-     * @return int La position en abscisse de l'aventurier
+     * @return int : La position en abscisse de l'aventurier
      */
     public int getXPosition() {
         return this.xPosition;
@@ -54,12 +54,16 @@ public class Aventurier {
 
     /**
      * Retourne la position en ordonnée de l'aventurier
-     * @return int La position en ordonnée de l'aventurier
+     * @return int : La position en ordonnée de l'aventurier
      */
     public int getYPosition() {
         return this.yPosition;
     }
 
+    /**
+     * Retourne le nom de l'aventurier
+     * @return String : Le nom de l'aventurier
+     */
     public String getNom() {
         return this.nom;
     }

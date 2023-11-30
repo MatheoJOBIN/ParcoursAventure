@@ -32,7 +32,8 @@ public class Main {
                                 lireDeplacements(fichierAventurier.getAbsolutePath()));
 
                         // Position finale de 'aventurier
-                        System.out.println("Position finale de l'aventurier " + aventurier.getNom() + " : (" + aventurier.getXPosition() + ", "
+                        System.out.println("Position finale de l'aventurier " + aventurier.getNom() + " : ("
+                                + aventurier.getXPosition() + ", "
                                 + aventurier.getYPosition() + ")");
                     }
                 }
@@ -47,21 +48,22 @@ public class Main {
     /**
      * Crée un aventurier avec une position initiale donnée
      * 
-     * @param cheminFichier Le chemin vers le fichier contenant les coordonnées
-     *                      initiales
-     * @param labyrinthe    Le labyrinthe dans lequel l'aventurier se trouve
-     * @return Aventurier L'aventurier créé
+     * @param cheminFichier Le chemin vers le fichier contenant les coordonnées initiales
+     * @param labyrinthe Le labyrinthe dans lequel l'aventurier se trouve
+     * @return Aventurier : L'aventurier créé
      * @throws IOException Exception levée si le fichier n'existe pas
      */
     private static Aventurier nouvelAventurier(String cheminFichier, Labyrinthe labyrinthe) throws IOException {
         BufferedReader lecteurFichier = new BufferedReader(new FileReader(cheminFichier));
         // Lisez la première ligne qui contient les coordonnées initiales
         String[] coordonnees = lecteurFichier.readLine().split(",");
-        String nomAventurier = cheminFichier.substring(cheminFichier.lastIndexOf(File.separator) + 1, cheminFichier.lastIndexOf("."));
+        String nomAventurier = cheminFichier.substring(cheminFichier.lastIndexOf(File.separator) + 1,
+                cheminFichier.lastIndexOf("."));
         lecteurFichier.close();
 
         // Création de l'aventurier
-        Aventurier aventurier = new Aventurier(nomAventurier, Integer.parseInt(coordonnees[0]), Integer.parseInt(coordonnees[1]),
+        Aventurier aventurier = new Aventurier(nomAventurier, Integer.parseInt(coordonnees[0]),
+                Integer.parseInt(coordonnees[1]),
                 labyrinthe);
 
         return aventurier;
@@ -71,7 +73,7 @@ public class Main {
      * Lit les déplacements depuis le fichier
      * 
      * @param cheminFichier Le chemin vers le fichier contenant les déplacements
-     * @return String Les déplacements
+     * @return String : Les déplacements
      * @throws IOException Exception levée si le fichier n'existe pas
      */
     private static String lireDeplacements(String cheminFichier) throws IOException {

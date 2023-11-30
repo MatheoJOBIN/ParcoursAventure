@@ -23,7 +23,7 @@ public class Labyrinthe {
      * Charge le labyrinthe depuis le fichier
      * 
      * @param cheminFichier Le chemin vers le fichier contenant le labyrinthe
-     * @return char[][] La matrice représentant le labyrinthe
+     * @return char[][] : La matrice représentant le labyrinthe
      * @throws IOException Exception levée si le fichier n'existe pas
      */
     private static char[][] chargerLabyrinthe(String cheminFichier) throws IOException {
@@ -79,7 +79,7 @@ public class Labyrinthe {
      * 
      * @param x Coordonnées en abscisse
      * @param y Coordonnées en ordonnée
-     * @return boolean True si les coordonnées sont dans le labyrinthe, false sinon
+     * @return boolean : True si les coordonnées sont dans le labyrinthe, false sinon
      */
     public boolean checkInbound(int x, int y) {
         if (x < 0 || y < 0 || x >= nbLignes || y >= nbColonnes) {
@@ -94,7 +94,7 @@ public class Labyrinthe {
      * 
      * @param x Coordonnées en abscisse
      * @param y Coordonnées en ordonnée
-     * @return boolean True si la case est libre, false sinon
+     * @return boolean : True si la case est libre, false sinon
      */
     public boolean checkFree(int x, int y) {
         if (carte[y][x] == '#') {
