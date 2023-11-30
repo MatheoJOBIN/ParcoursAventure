@@ -67,7 +67,7 @@ public class Aventurier {
      * Affiche le parcours de l'aventurier
      */
     public void afficherParcours() {
-        System.out.println("Parcours de " + this.nom + " :\n");
+        System.out.println("\n\nParcours de " + this.nom + " :\n");
         for (Coordonnees etape : parcours.getEtapes()) {
             System.out.println(etape.getX() + "," + etape.getY());
         }

@@ -40,10 +40,10 @@ public class Main {
                         int positionFinaleX = aventurier.getActualPosition().getX();
                         int positionFinaleY = aventurier.getActualPosition().getY();
 
-                        System.out.println("Position finale de l'aventurier " + aventurier.getNom() + " : ("
+                        aventurier.afficherParcours();
+                        System.out.println("\n Position finale de l'aventurier " + aventurier.getNom() + " : ("
                                 + positionFinaleX + ", "
                                 + positionFinaleY + ")");
-                        aventurier.afficherParcours();
                     }
                 }
             } else {
