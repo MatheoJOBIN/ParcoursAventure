@@ -5,9 +5,9 @@ import java.io.FileReader;
 import java.io.IOException;
 
 public class Labyrinthe {
-    private static char[][] carte;
-    private static int nbLignes;
-    private static int nbColonnes;
+    private char[][] carte;
+    private int nbLignes;
+    private int nbColonnes;
 
     /**
      * Crée un labyrinthe à partir d'un fichier
@@ -16,7 +16,9 @@ public class Labyrinthe {
      * @throws IOException Exception levée si le fichier n'existe pas
      */
     public Labyrinthe(String cheminFichier) throws IOException {
-        Labyrinthe.carte = chargerLabyrinthe(cheminFichier);
+        this.carte = chargerLabyrinthe(cheminFichier);
+        this.nbLignes = carte.length;
+        this.nbColonnes = (carte.length > 0) ? carte[0].length : 0;
     }
 
     /**
@@ -26,12 +28,10 @@ public class Labyrinthe {
      * @return char[][] : La matrice représentant le labyrinthe
      * @throws IOException Exception levée si le fichier n'existe pas
      */
-    private static char[][] chargerLabyrinthe(String cheminFichier) throws IOException {
+    private char[][] chargerLabyrinthe(String cheminFichier) throws IOException {
         BufferedReader lecteurFichier = new BufferedReader(new FileReader(cheminFichier));
 
         // Vérifie la taille du labyrinthe
-        nbLignes = 0;
-        nbColonnes = 0;
         String ligne;
         while ((ligne = lecteurFichier.readLine()) != null) {
             nbLignes++;
@@ -82,11 +82,7 @@ public class Labyrinthe {
      * @return boolean : True si les coordonnées sont dans le labyrinthe, false sinon
      */
     public boolean checkInbound(int x, int y) {
-        if (x < 0 || y < 0 || x >= nbLignes || y >= nbColonnes) {
-            return false;
-        } else {
-            return true;
-        }
+        return x >= 0 && y >= 0 && x < nbColonnes && y < nbLignes;
     }
 
     /**

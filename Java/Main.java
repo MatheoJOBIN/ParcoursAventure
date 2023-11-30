@@ -23,31 +23,36 @@ public class Main {
 
             // Récupération de tous les aventuriers
             File dossierAventuriers = new File(cheminAventuriers);
-            File[] fichiersAventuriers = dossierAventuriers.listFiles();
+            // Vérification de l'existence du dossier Aventuriers
+            if (dossierAventuriers.exists() && dossierAventuriers.isDirectory()) {
+                File[] fichiersAventuriers = dossierAventuriers.listFiles();
 
-            if (fichiersAventuriers != null) {
-                for (File fichierAventurier : fichiersAventuriers) {
-                    if (fichierAventurier.isFile()) {
-                        // Création de l'aventurier, et ajout de celui-ci à la liste des aventuriers
-                        Aventurier aventurier = nouvelAventurier(fichierAventurier.getAbsolutePath(), labyrinthe);
-                        aventuriers.put(aventurier.getNom(), aventurier);
+                // Vérification de l'existence d'aventuriers dans le dossier
+                if (fichiersAventuriers != null) {
+                    for (File fichierAventurier : fichiersAventuriers) {
+                        if (fichierAventurier.isFile()) {
+                            // Création de l'aventurier, et ajout de celui-ci à la liste des aventuriers
+                            Aventurier aventurier = nouvelAventurier(fichierAventurier.getAbsolutePath(), labyrinthe);
+                            aventuriers.put(aventurier.getNom(), aventurier);
 
-                        // Résolution des déplacements
-                        deplacerAventurier(labyrinthe, aventurier,
-                                lireDeplacements(fichierAventurier.getAbsolutePath()));
+                            // Résolution des déplacements
+                            deplacerAventurier(labyrinthe, aventurier, lireDeplacements(fichierAventurier.getAbsolutePath()));
 
-                        // Position finale de 'aventurier
-                        int positionFinaleX = aventurier.getActualPosition().getX();
-                        int positionFinaleY = aventurier.getActualPosition().getY();
+                            // Position finale de 'aventurier
+                            int positionFinaleX = aventurier.getActualPosition().getX();
+                            int positionFinaleY = aventurier.getActualPosition().getY();
 
-                        aventurier.afficherParcours();
-                        System.out.println("\n Position finale de l'aventurier " + aventurier.getNom() + " : ("
-                                + positionFinaleX + ", "
-                                + positionFinaleY + ")\n");
+                            aventurier.afficherParcours();
+                            System.out.println("\n Position finale de l'aventurier " + aventurier.getNom() + " : ("
+                                    + positionFinaleX + ", "
+                                    + positionFinaleY + ")\n");
+                        }
                     }
+                } else {
+                    System.out.println("Le dossier des aventuriers est vide.");
                 }
             } else {
-                System.out.println("Le dossier des aventuriers est vide ou n'existe pas.");
+                System.out.println("Le dossier des aventuriers n'existe pas.");
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -66,14 +71,11 @@ public class Main {
         BufferedReader lecteurFichier = new BufferedReader(new FileReader(cheminFichier));
         // Lisez la première ligne qui contient les coordonnées initiales
         String[] coordonnees = lecteurFichier.readLine().split(",");
-        String nomAventurier = cheminFichier.substring(cheminFichier.lastIndexOf(File.separator) + 1,
-                cheminFichier.lastIndexOf("."));
+        String nomAventurier = cheminFichier.substring(cheminFichier.lastIndexOf(File.separator) + 1, cheminFichier.lastIndexOf("."));
         lecteurFichier.close();
 
         // Création de l'aventurier
-        Aventurier aventurier = new Aventurier(nomAventurier, Integer.parseInt(coordonnees[0]),
-                Integer.parseInt(coordonnees[1]),
-                labyrinthe);
+        Aventurier aventurier = new Aventurier(nomAventurier, Integer.parseInt(coordonnees[0]), Integer.parseInt(coordonnees[1]), labyrinthe);
 
         return aventurier;
     }
@@ -86,12 +88,14 @@ public class Main {
      * @throws IOException Exception levée si le fichier n'existe pas
      */
     private static String lireDeplacements(String cheminFichier) throws IOException {
-        BufferedReader lecteurFichier = new BufferedReader(new FileReader(cheminFichier));
-        // Lisez la deuxième ligne qui contient les déplacements
-        lecteurFichier.readLine(); // Ignorez la première ligne (coordonnées initiales)
-        String deplacements = lecteurFichier.readLine();
-        lecteurFichier.close();
-        return deplacements;
+        try (BufferedReader lecteurFichier = new BufferedReader(new FileReader(cheminFichier))) {
+            lecteurFichier.readLine(); // La première ligne contient les coordonnées de départ, on ne la lit donc pas
+            String deplacements = lecteurFichier.readLine();
+            return deplacements;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;    // Ne devrait jamais arriver        
     }
 
     /**

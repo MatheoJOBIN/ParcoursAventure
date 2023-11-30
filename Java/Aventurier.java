@@ -13,9 +13,10 @@ public class Aventurier {
      * @param labyrinthe Le labyrinthe dans lequel l'aventurier se trouve
      */
     public Aventurier(String nom, int xPosition, int yPosition, Labyrinthe labyrinthe) {
-        if (xPosition < 0 || yPosition < 0 || !labyrinthe.checkInbound(xPosition, yPosition)
-                || !labyrinthe.checkFree(xPosition, yPosition)) {
+        if (xPosition < 0 || yPosition < 0 || !labyrinthe.checkInbound(xPosition, yPosition) || !labyrinthe.checkFree(xPosition, yPosition)) {
             throw new IllegalArgumentException("La position initiale de l'aventurier est invalide.");
+        } else if (nom == null || nom.trim().isEmpty()) {
+            throw new IllegalArgumentException("Le nom de l'aventurier est invalide.");
         } else {
             this.nom = nom;
             this.parcours = new Parcours(xPosition, yPosition);

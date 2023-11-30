@@ -46,7 +46,7 @@ public class Parcours {
      * Retourne la liste des étapes
      * @return List<Coordonnees> : La liste des étapes
      */
-    public List<Coordonnees> getEtapes() {
+    protected List<Coordonnees> getEtapes() {
         return etapes;
     }
 
