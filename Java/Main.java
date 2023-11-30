@@ -110,6 +110,7 @@ public class Main {
 
             int x = aventurier.getActualPosition().getX();
             int y = aventurier.getActualPosition().getY();
+            System.out.println("x : " + x + " y : " + y);
 
             switch (deplacement) {
                 case 'N':
